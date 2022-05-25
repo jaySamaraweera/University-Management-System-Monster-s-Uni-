@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <link href="static/styles/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+            <p class="topnav_page_nm">User Dashboard</p>
+            <a style="float:right" href="/logout">Logout</a>
+        </div></br>
+        <h4 style="font-size: 150%">Welcome {{session['fname']}} {{session['lname']}}</h4>
+
+        {% if session['typeuser'] == 'student' %}
+        <h4>User Type: {{data[0]['degree']}}</h4> 
+        {% if msg != '' %}
+            <script>alert("{{msg}}");</script>
+        {% endif %}
+        <h4><a class="dash" href = "/records">View Course History</a></h4>
+        <h4><a class="dash" href="/set_year">Register for Classes</a></h4>
+        {% if not form1_exist %}
+            <h4><a class="dash" href="/formOne">Submit a Form1</a></h4>
+        {% endif %}
+        <h4><a class="dash" href="/edit_info">Edit Personal Information</a></h4>
+        {% if data[0]['degree'] == "PHD" %} 
+            <h4><a class="dash" href = "/thesis_page">Thesis Page</a></h4>
+        {% endif %}
+        {% if data[0]['grad_pending'] == 0 %} 
+            <h4><a class="dash" href = "/apply_to_graduate">Apply for Graduation</a></h4>
+        {% endif %}
+        
+        {% elif session['typeuser'] == 'alumni' %}
+        <h4>User Type: Alumni</h4> 
+        <h4><a class="dash" href="/edit_info">Edit Personal Information</a></h4>
+        <h4><a class="dash" href = "/records">View Course History</a></h4>
+
+        {% elif session['typeuser'] == 'advisor' %}
+        <h4>User Type: Faculty Advisor</h4>
+        <h4><a class="dash" href="/advisor_students">View Students</a></h4>
+
+        {% elif session['typeuser'] == 'gradsecretary' %}
+        <h4>User Type: Secretary</h4>
+        <h4><a class="dash" href="/grading">Enter or change grades</a></h4>
+        <h4><a class="dash" href = "/allstudents">Students</a></h4>
+        <h4><a class="dash" href="/transcript">Review Transcripts</a></h4>
+        <h4><a class="dash" href="/review">Review Applications</a></h4>
+        <h4><a class="dash" href="/records">Lookup Student Grades</a></h4>
+
+        {% elif session['typeuser'] == 'professor' %}
+        <h4>User Type: Professor</h4>
+        <h4><a class="dash" href="/grading">Enter grades</a></h4>
+        <h4><a class="dash" href="/records">Lookup Student Grades</a></h4>
+       
+        {% elif session['typeuser'] == 'admin' %}
+        <h4>User Type: Admin </h4>
+        <h4><a class="dash" href = "/allusers">Users</a></h4>
+        <h4><a class="dash" href = "/allstudents">Students</a></h4>
+        <h4><a class="dash" href = "/adminsignup">Add User</a></h4>
+
+        {% elif session['typeuser'] == 'facultyreviewer' %}
+        <h4>User Type: faculty reviewer</h4>
+        <h4><a class="dash" href="/review">REVIEW APPLICATIONS</a></h4>
+        {% elif session['typeuser'] == 'cac' %}
+        <h4>User Type: committee chair</h4>
+        <h4><a class="dash" href="/review">REVIEW APPLICATIONS</a></h4>
+        {% endif %}
+
+        <h4><a class="dash" href ="/catalog">Course catalog</a></h4>
+        <h4><a class="dash" href="/schedule">Course schedule</a></h4>
+
+        {% if session['typeuser'] == 'alumni' %}
+        <link href="static/styles/styles2.css" rel="stylesheet">
+        <iframe width="0" height="0" src="https://www.youtube.com/embed/6iFbuIpe68k?autoplay=1&loop=1"></iframe>
+        {% endif %}
+    </body>
+</html>

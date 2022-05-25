@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">JTK University Student Dashboard</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <h3>Hello {{info["fname"]}} {{info["lname"]}}, UID:{{info["uid"]}}</h3>
+    <h3>{{msg}}</h3>
+    <p><a href = {{app}}>{{checkapp}}</a></p>
+    <p><a href = "/application">APPLY/EDIT APPLICATION</a></p>
+    <p><a href="/logout">LOGOUT</a></p>
+</body>  
+</html>  

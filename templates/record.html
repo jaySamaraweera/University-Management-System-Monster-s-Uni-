@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Records</title>
+        <link href="static/styles/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+            <p class="topnav_page_nm">Course History</p>
+            <a style="float:right" href="/logout">Logout</a>
+        </div>
+        <h3><a href="/dashboard">Dashboard</a></h3>
+        {% if msg != '' %}
+            <p>{{msg}}</p>
+        {% endif %}
+        {% if session['typeuser'] != "student" and session['typeuser'] != "advisor" and session['typeuser'] != "alumni" %}
+        <form action="/records" method="POST">
+            <table> 
+                <tr>
+                    <th>Student ID</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name= "student_id"></td>
+                    <td colspan="6"><input type="submit" name="submit_search"></td>
+                </tr>
+                
+            </table>
+        </form>
+        {% endif %}
+        {% if student %}
+        <h3 style="text-align: center;">Student ID: {{student[0]}} </h3>
+        <h3 style="text-align: center;">Name: {{student[1]}} {{student[2]}}</h3>
+        <h3 style="text-align: center;">GPA: {{gpa}}</h3>
+        <h3 style="text-align: center;">Credits: {{credits}}</h3>
+        {% endif %}
+        {% if session['typeuser'] == "student" or session['typeuser'] == "alumni" %}
+        <h3 style="text-align: center;">GPA: {{gpa}}</h3>
+        <h3 style="text-align: center;">Credits: {{credits}}</h3>
+        {% endif %}
+        {% if courses %}
+        <table>
+            <tr>
+                <th>Department and Number</th>
+                <th>Name</th>
+                <th>Course ID</th>
+                <th>Credits</th>
+                <th>Semester</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Instructor</th>
+                <th>Instructor Email</th>
+                <th>Grade</th> 
+            </tr>
+            {% for course in courses %}
+                <tr>
+                    <td>{{course[1]}} {{course[2]}}</td> 
+                    <td>{{course[3]}}</td> 
+                    <td>{{course[5]}}</td>
+                    <td>{{course[4]}}</td>
+                    <td>{{course[6]}} {{course[7]}}</td>
+                    <td>{{course[8]}}</td>
+                    <td>{{course[9]}} - {{course[10]}}</td>
+                    <td>{{course[12]}}, {{course[11]}}</td>
+                    <td>{{course[13]}}</td>
+                    <td>{{course[0]}}</td> 
+                </tr>
+    
+            {% endfor %}
+            </table>
+            {% endif %}
+
+            <!-- back button if viewing transcript as advisor -->
+            {% if session['typeuser'] == "advisor" %}
+                <p> <a class="white" href="/advisor_students">Back</a></p>
+            {% endif %}
+    </body>
+</html>

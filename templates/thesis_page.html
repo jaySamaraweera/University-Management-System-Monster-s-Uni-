@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thesis</title>
+    <link href="/static/styles/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+      <p class="topnav_page_nm">Thesis Page</p>
+      <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    {% if data[0]['thesis'] == '' %}
+        <form action="/submit_thesis" method="POST">
+          <p>PhD Thesis:</p>
+          <textarea name="submitted_thesis" rows="4" cols="100">{{data[0]['thesis']}}</textarea><br>
+          <input type="submit" class="viewcBtn" value="Submit Thesis">
+        </form>
+        <p>NOTE: IF YOU WRITE THESIS AND DON'T SUBMIT, IT WILL NOT SAVE</p>
+      {% else %}
+        <p >Thesis has been submitted</p>
+      {% endif %}
+
+      <p align = "left" > <a class="white" href="/dashboard">Back</a></p>
+  </body>
+</html>

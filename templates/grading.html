@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Enter or change grades</title>
+        <link href="/static/styles/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+            <p class="topnav_page_nm">Grading Page</p>
+            <a style="float:right" href="/logout">Logout</a>
+          </div></br>
+        <h3><a href="/dashboard">Dashboard</a></h3>
+        <form action="/grading" method="POST">
+        <table> 
+            <tr>
+                <th>Student ID</th>
+                <th>Course ID</th>
+            </tr>
+            <tr>
+                <td><input type="text" name= "student_id"></td>
+                <td><input type="text" name= "course_id"></td> 
+                <td colspan="6"><input type="submit" name="submit_search"></td>
+            </tr>
+            
+        </table>
+        </form>
+        {% if courses %}
+        <form action="/grading" method="POST"> 
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Semester and Year</th>
+                <th>Grade</th>
+                <th>Updated Grade</th>
+            </tr>
+
+        
+        
+        {% for course in courses %}
+            <tr>
+                <td> {{course[0]}} </td>
+                <td> {{course[1]}} {{course[2]}}</td>
+                <td> {{course[3]}} </td>
+                <td> {{course[4]}} </td>
+                <td> {{course[5]}} {{course[6]}}</td>
+                <td> {{course[8]}}</td>
+                <td><input type="text" name= {{course[0]}}-{{course[9]}}></td>
+            </tr>
+
+        {% endfor %}
+        <td colspan="6"><input type="submit" name="submit"></td>
+        </table>
+    </form>
+    {% else %}
+    <h2>No grades need to be inserted.</h2>
+    {% endif %}
+    </body>
+</html>

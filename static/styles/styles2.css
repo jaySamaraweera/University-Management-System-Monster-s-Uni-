@@ -1,0 +1,16 @@
+
+html {
+    background-color: lightskyblue;
+    animation-name: bing; 
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    background-image: url('plswork.gif');
+    background-position: center;
+    background-size: cover;
+}
+@keyframes bing {
+    0% {background-color: lightskyblue;}
+    50% {background-color: rgb(83, 120, 253);}
+    100% {background-color: lightskyblue;}
+  }
+  

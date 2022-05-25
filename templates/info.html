@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link href="/static/styles/styles.css" rel="stylesheet">
+<title>Users</title>
+
+</head>
+<body>
+    <div class="topnav">
+        <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">User Info</p>
+        <a style="float:right" href="/logout">Logout</a>
+      </div></br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Email Address</th>
+            <th>Phone Number</th>
+            <th>Type</th>
+        </tr>
+        {% for admin in admins %}
+        <tr>
+            <td>{{admin[0]}}</td>
+            <td>{{admin[1]}}</td>
+            <td>{{admin[2]}}</td>
+            <td>{{admin[3]}}</td>
+            <td>{{admin[4]}}</td>
+            <td>{{admin[5]}}</td>
+            <td>{{admin[6]}}</td>
+        </tr>
+        {% endfor %}
+        {% for gradsec in gradsecs %}
+        <tr>
+            <td>{{gradsec[0]}}</td>
+            <td>{{gradsec[1]}}</td>
+            <td>{{gradsec[2]}}</td>
+            <td>{{gradsec[3]}}</td>
+            <td>{{gradsec[4]}}</td>
+            <td>{{gradsec[5]}}</td>
+            <td>{{gradsec[6]}}</td>
+        </tr>
+        {% endfor %}
+        {% for advisor in advisors %}
+        <tr>
+            <td>{{advisor[0]}}</td>
+            <td>{{advisor[1]}}</td>
+            <td>{{advisor[2]}}</td>
+            <td>{{advisor[3]}}</td>
+            <td>{{advisor[4]}}</td>
+            <td>{{advisor[5]}}</td>
+            <td>{{advisor[6]}}</td>
+        </tr>
+        {% endfor %}
+        {% for prof in profs %}
+        <tr>
+            <td>{{prof[0]}}</td>
+            <td>{{prof[1]}}</td>
+            <td>{{prof[2]}}</td>
+            <td>{{prof[3]}}</td>
+            <td>{{prof[4]}}</td>
+            <td>{{prof[5]}}</td>
+            <td>{{prof[6]}}</td>
+        </tr>
+        {% endfor %}
+        {% for stud in studs %}
+        <tr>
+            <td>{{stud[0]}}</td>
+            <td>{{stud[1]}}</td>
+            <td>{{stud[2]}}</td>
+            <td>{{stud[3]}}</td>
+            <td>{{stud[4]}}</td>
+            <td>{{stud[5]}}</td>
+            <td>{{stud[6]}}</td>
+        </tr>
+        {% endfor %}
+        {% for alum in alums %}
+        <tr>
+            <td>{{alum[0]}}</td>
+            <td>{{alum[1]}}</td>
+            <td>{{alum[2]}}</td>
+            <td>{{alum[3]}}</td>
+            <td>{{alum[4]}}</td>
+            <td>{{alum[5]}}</td>
+            <td>{{alum[6]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>

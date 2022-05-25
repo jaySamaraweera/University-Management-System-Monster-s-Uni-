@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">List of Transcripts to Review</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    {% for rev in transcript %}
+    <li><a href="/transcript/{{rev['UID']}}">{{rev["UID"]}}</li>
+    {% endfor %}
+</body>  
+</html>  

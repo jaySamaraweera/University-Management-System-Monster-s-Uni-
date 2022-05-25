@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Forgot Password</title>
+    <link href="/static/styles/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+      <p class="topnav_page_nm">Reset Password</p>
+      <!-- <a style="float:right" href="/logout">Logout</a> -->
+    </div></br>
+    {% if pass_pw != '' %}
+      <form action="/reset_pass" method="POST">
+        <input type = "hidden" name = "u_uid" value = {{u_uid}}>
+        <table class = "center">
+          <td>Old Password:</td>
+          <td><input type="text" name="pass_pw" value={{pass_pw}} disabled="disabled"></td>
+          <tr>
+            <td>Enter New Password:</td>
+            <td><input type='text' name='new_pw'></td>
+          </tr>
+          <br><br>
+          <tr>
+            <td colspan = "2"><input type="submit" class="viewcBtn" value="Submit"></td>
+          </tr>
+        </table>
+      </form> 
+    {% else %}
+      <form action="/forgot_pw" method="POST">
+        <table class = "center">
+          {% if mes != '' %}
+            <p class="err">{{mes}}</p>
+          {% endif %}
+          <td>First Name:</td>
+          <td><input type="text" name="fname_pw" required></td>
+          <tr>
+            <td>Last Name:</td>
+            <td><input type='text' name='lname_pw' required></td>
+          </tr>
+          <tr>
+            <td>SSN:</td>
+            <td><input type='text' name='ssn_pw' required></td>
+          </tr>
+          <br><br>
+          <tr>
+            <td colspan = "2"><input type="submit" class="viewcBtn" value="Submit"></td>
+          </tr>
+        </table>
+      </form>
+    {% endif %}
+  </body>
+</html>

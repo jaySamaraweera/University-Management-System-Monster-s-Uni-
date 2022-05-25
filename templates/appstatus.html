@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a href="/applicant/{{app['UID']}}"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">Application Status for AID:{{app["AID"]}}</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <!-- <h2>Application Status for AID:{{app["AID"]}}</h2> -->
+    <h3>UID:{{app["UID"]}}</h3>
+    <h3>Application Status: {{status}}</h3>
+    <p>
+        {% for message in msg %}
+            <ul><li>{{message}}</li></ul>
+        {% endfor %}  
+    </p>
+    <p><a href = "/applicant/{{app['UID']}}">BACK TO DASH</a></p>
+</body>  
+</html>  

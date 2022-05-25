@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">Transcript Review</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <h1>Transcript Review: {{info["uid"]}} </h1>
+    <h3>Name: {{info["fname"]}} {{info["lname"]}}</h3>
+    <p>Transcript Recieved?</p> 
+    <form action ="/transcript/{{info['uid']}}" method="POST">
+    <input type="radio" value = "1" name="choice">YES</input>
+    <input type="radio" value = "0" name="choice">NO</input>
+    <p><input type ="submit" value="SUBMIT"/></p>
+    </form>
+</body>  
+</html>  

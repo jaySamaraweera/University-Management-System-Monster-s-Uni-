@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">Recommendation Letter Submission</p>
+        <!-- <a style="float:right" href="/logout">Logout</a> -->
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <h2>{{msg}}</h2>
+    <form action ="/recletter" method = "POST">
+        <table class = "center">
+            <tr class = "c1">
+                <td>First Name of Student: </td>
+                <td><input type="text" name="field_fname" maxLength = "50" required></td>
+            </tr>
+            <tr>
+                <td>Last Name of Student: </td>
+                <td><input type="text" name="field_lname" maxLength = "50" required></td>
+            </tr>
+            <tr>
+                <td>Phone Number of Student: </td>
+                <td><input type = "text" name = "field_phone" maxLength = "50" required></td>
+            </tr>
+            <td colspan = "2"><input type="submit" name="submit"></td>
+        </table>
+    </form>    
+    <p><a href = "/">BACK TO HOME</a></p>
+</body>  
+</html> 

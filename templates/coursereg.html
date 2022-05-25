@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Course Registration {{session['fname']}} {{session['lname']}}</title>
+        <link href="/static/styles/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+            <p class="topnav_page_nm">Hello! Welcome to the Registration Menu</p>
+            <a style="float:right" href="/logout">Logout</a>
+        </div></br>
+
+        <h3><a href="/dashboard">Dashboard</a></h3>
+        <h3><a href="/set_year">Change Semester</a></h3>
+        {% for error in errors %}
+        <h2>{{error}}</h2>
+        {% endfor %}
+
+        <h3 style="text-align: center;">Courses Offered</h3>
+        <form action = "{{url_for('addbysectid')}}" method = "POST">
+            <table>
+
+                <tr>
+                    <th>Add by Section ID</th>
+                </tr>
+                <tr>
+                    <td><input type = "text" name = "sect_id" placeholder = "Section ID"></td>
+                    <td><input type = "submit" value = "Add to Basket"></td>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <thead>
+                <th>Section ID</th>
+                <th>Course ID</th>
+                <th>Section Num</th>
+                <th>Course Department</th>
+                <th>Course Number</th>
+                <th>Title</th>
+                <th>Credits</th>
+                <th>Semester</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Instructor</th>
+                <th>&nbsp</th>
+            </thead>
+        {% for section in sections %}
+
+        {% if section['sect_id']|string not in session['coursebasket'].keys() %}
+            <form action="{{url_for('addtobasket')}}" method="POST">
+                <input type="hidden" name="sectid" value="{{section['sect_id']}}">
+            <tr>
+                <td>{{section['sect_id']}}</td>
+                <td>{{section['course_id']}}</td>
+                <td>{{section['sect_num']}}</td>
+                <td>{{section['course_dname']}}</td>
+                <td>{{section['course_num']}}</td>
+                <td>{{section['course_name']}}</td>
+                <td>{{section['credits']}}</td>
+                <td>{{section['semester']}} {{section['year']}}</td>
+                <td>{{section['day_name']}}</td>
+                <td> {{section['start_time']}} — {{section['end_time']}}</td>
+                <td> {{section['instfname']}} {{section['instlname']}}</td>
+                <td> <input type="submit" value="Add to Basket"> </td>
+            </tr>
+            </form>
+        {% endif %}
+        {% endfor %}
+        </table>
+        <br>
+
+        {% if currentcourses %}
+        <h3 style="text-align: center;">Courses Registered</h3>
+        <h5><a href="{{url_for('dropall')}}">Drop All In-Progress Classes</a></h5>
+
+        <table>
+            <thead>
+                <th>Section ID</th>
+                <th>Course ID</th>
+                <th>Section Num</th>
+                <th>Course Department</th>
+                <th>Course Number</th>
+                <th>Title</th>
+                <th>Credits</th>
+                <th>Semester</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Instructor</th>
+                <th>&nbsp</th>
+            </thead>
+
+        {% for section in currentcourses %}
+            <form action="{{url_for('dropcourse')}}" method="POST">
+                <input type="hidden" name="sectid" value="{{section['sect_id']}}">
+            <tr>
+                <td>{{section['sect_id']}}</td>
+                <td>{{section['course_id']}}</td>
+                <td>{{section['sect_num']}}</td>
+                <td>{{section['course_dname']}}</td>
+                <td>{{section['course_num']}}</td>
+                <td>{{section['course_name']}}</td>
+                <td>{{section['credits']}}</td>
+                <td>{{section['semester']}} {{section['year']}}</td>
+                <td>{{section['day_name']}}</td>
+                <td> {{section['start_time']}} — {{section['end_time']}}</td>
+                <td> {{section['instfname']}} {{section['instlname']}}</td>
+                {% if section['grade'] == 'IP' %}
+                <td> <input type="submit" value="Drop Course"> </td>
+                {% else %}
+                <td> Graded </td>
+                {% endif %}
+            </tr>
+            </form>
+        {% endfor %}
+        </table>
+        {% endif %}
+        
+        {% if session['coursebasket'] %}
+        <h3 style="text-align: center;">Courses in Your Basket</h3>
+        <h5><a href="{{url_for('clearbasket')}}">Clear Basket</a></h5>
+        <table>
+            <thead>
+                <th>Section ID</th>
+                <th>Course ID</th>
+                <th>Section Num</th>
+                <th>Course Department</th>
+                <th>Course Number</th>
+                <th>Title</th>
+                <th>Credits</th>
+                <th>Semester</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Instructor</th>
+                <th>&nbsp</th>
+            </thead>
+        {% for section in session['coursebasket'].values() %}
+        <form action="{{url_for('removefrombasket')}}" method="POST">
+            <input type="hidden" name="sectid" value="{{section['sect_id']}}">
+        <tr>
+            <td>{{section['sect_id']}}</td>
+            <td>{{section['course_id']}}</td>
+            <td>{{section['sect_num']}}</td>
+            <td>{{section['course_dname']}}</td>
+            <td>{{section['course_num']}}</td>
+            <td>{{section['course_name']}}</td>
+            <td>{{section['credits']}}</td>
+            <td>{{section['semester']}} {{section['year']}}</td>
+            <td>{{section['day_name']}}</td>
+            <td> {{section['start_time']}} — {{section['end_time']}}</td>
+            <td> {{section['instfname']}} {{section['instlname']}}</td>
+            <td> <input type="submit" value="Remove from Basket"> </td>
+        </tr>
+        </form>
+        {% endfor %}
+        <tr>
+            <td colspan="12">
+                <form action="/coursereg" method="POST">
+                    <input type="submit" value="Submit Selection">
+                </form>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a href="/applicant/{{user['uid']}}"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">Application for UID: {{user["uid"]}}</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <!-- <h2>Application for UID: {{user["uid"]}}</h2> -->
+    <p>Name: {{user["fname"]}} {{user["lname"]}}</p>
+    <form action ="/application" method="POST">
+        <p>Degree
+            {% for degree in deg %}
+                <input type ="radio" value = "{{degree['num_degree']}}" name = "applied_degree" {{"checked" if app["APPLIED_DEGREE"] == degree["num_degree"] else ""}} required>{{degree["degree"]}}</input>
+            {% endfor %}
+        </p>
+        
+
+        <p>Semester 
+            {% for semester in sem %}
+                <input type="radio" value = "{{semester['num_semestr']}}" name="semester" {{"checked" if app["SEMSTR_SUBMITTED"] == semester["num_semestr"] else ""}} required>{{semester["semester"]}}</input>
+            {% endfor %}   <br>
+        </p>
+
+        Year Applying:
+        <p><input type ="number" name = "year_submitted" min="1980" max = "2021" minLength = "4" value = "{{app["YEAR_SUBMITTED"] if app["YEAR_SUBMITTED"] is not none else ""}}" required></p>
+
+        <h3> Test Scores</h3>
+        GRE Verbal:
+        <p><input type ="number" name = "gre_verbal" min="130" max = "170" value = "{{app["GRE_VERBAL"] if app["GRE_VERBAL"] is not none else ""}}" ></p><br>
+        GRE Quantitative:
+        <p><input type ="number" name = "gre_quant" min="130" max = "170" value = "{{app["GRE_QUANT"] if app["GRE_QUANT"] is not none else ""}}" ></p><br>
+        GRE Year of Exam:
+        <p><input type ="number" name = "gre_year" min="1980" max = "2022"></p><br>
+
+        GRE Advanced Score:
+        <p><input type ="number" name = "gre_adv_score" min="200" max = "990" minLength = "3" value = "{{app["GRE_ADV_SCORE"] if app["GRE_ADV_SCORE"] is not none else ""}}" ></p><br>
+        GRE Advanced Subject:
+        <p><input type ="text" name = "gre_adv_subj" min="130" max = "170" minLength = "3" value = "{{app["GRE_ADV_SUBJ"] if app["GRE_ADV_SUBJ"] is not none else ""}}" ></p><br>
+
+        TOEFL Score:
+        <p><input type ="number" name = "toefl_score" min="0" max = "120" minLength = "3" value = "{{app["TOEFL_SCORE"] if app["TOEFL_SCORE"] is not none else ""}}" ></p><br>
+        TOEFL Year:
+        <p><input type ="number" name = "toefl_year" min="1980" max = "2022" minLength = "4" value = "{{app["TOEFL_YEAR"] if app["TOEFL_YEAR"] is not none else ""}}" ></p><br>
+
+        <h3>Prior Degree(s):</h3>
+        Prior Degree 1:
+        <p>
+            {% for degree1 in degChoices %}
+                <input type ="radio" value = "{{degree1['num_degree']}}" name = "prior_deg1" {{"checked" if priorD[0]["prior_deg"] == degree1["num_degree"]  else ""}} >{{degree1["degree"]}}</input>
+            {% endfor %}
+        </p>
+        GPA:
+        <input type="number" name="gpa1" min="0" max="4" step="0.1" value = "{{priorD[0]["gpa"] if priorD[0]["gpa"] is not none else ""}}" ><br>
+        Major:
+        <p><input type ="text" name = "major1" maxLength = "50" value = "{{priorD[0]["major"] if priorD[0]["major"] is not none else ""}}" ></p><br>
+        Year:
+        <p><input type ="number" name = "year1" min="1980" max = "2022" minLength = "4" value = "{{priorD[0]["year"] if priorD[0]["year"] is not none else ""}}" ></p><br>
+        University:
+        <p><input type ="text" name = "schoolname1" maxLength = "50" value = "{{priorD[0]["schoolname"] if priorD[0]["schoolname"] is not none else ""}}" ></p><br>
+
+        Prior Degree 2:
+        <p>
+            {% for degree2 in degChoices %}
+                <input type ="radio" value = "{{degree2['num_degree']}}" name = "prior_deg2" {{"checked" if priorD[1]["prior_deg"] == degree2["num_degree"] else ""}} >{{degree2["degree"]}}</input>
+            {% endfor %}
+        </p>
+        GPA:
+        <input type="number" name="gpa2" min="0" max="4" step="0.1" value = "{{priorD[1]["gpa"] if priorD[1]["gpa"] is not none else ""}}" ><br>
+        Major:
+        <p><input type ="text" name = "major2" maxLength = "50" value = "{{priorD[1]["major"] if priorD[1]["major"] is not none else ""}}" ></p><br>
+        Year:
+        <p><input type ="number" name = "year2" min="1980" max = "2022" minLength = "4" value = "{{priorD[1]["year"] if priorD[1]["year"] is not none else ""}}" ></p><br>
+        University:
+        <p><input type ="text" name = "schoolname2" maxLength = "50" value = "{{priorD[1]["schoolname"] if priorD[1]["schoolname"] is not none else ""}}" ></p><br>
+
+        Work Experience:
+        <p><input type ="text" maxLength = "100" name = "experience" value = "{{app["INTERESTS"] if app["INTERESTS"] is not none else ""}}" ></p><br>
+
+        Interest:
+        <p><input type ="text" maxLength = "100" name = "interest" value = "{{app["EXPERIENCE"] if app["EXPERIENCE"] is not none else ""}}" ></p><br>
+
+        <p><input type ="submit" value="SUBMIT"/></p>
+        <p><a href = "/applicant/{{user['uid']}}">BACK TO DASH</a></p>
+    </form>
+</body>  
+</html>    

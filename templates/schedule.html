@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Course Schedule</title>
+        <link href="/static/styles/styles.css" rel="stylesheet">
+        <script src="/static/styles/java_script.js"></script>
+
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+            <p class="topnav_page_nm">Course Schedule</p>
+            <a style="float:right" href="/logout">Logout</a>
+        </div></br>
+        <h3><a href="/dashboard">Dashboard</a></h3>
+        <h3><a href="/schedule">Back to Default</a></h3>
+        <form name = "sem"  onsubmit = "return validateSemester()" action="/schedule" method="POST">
+            <table> 
+                <tr>
+                    <th>Semester Number</th>
+                </tr>
+                <tr>
+                    <td><input type="number" name= "sem_no" min ="0" max ="3"></td>
+                    <td colspan="6"><input type="submit"></td>
+                </tr>
+                
+            </table>
+        </form>
+        <table>
+            <tr>
+                <th>Section ID</th>
+                <th>Department</th>
+                <th>Course Number</th>
+                <th>Title</th>
+                <th>Section</th>
+                <th>Credits</th>
+                <th>Day</th>
+                <th>Instructor</th>
+                <th>Time</th>
+            </tr>
+        {% for course in courses %}
+            <tr>
+                <td>{{course['sect_id']}}</td> 
+                <td>{{course['course_dname']}}</td>
+                <td>{{course['course_num']}}</td> 
+                <td>{{course['course_name']}}</td>
+                <td>{{course['sect_num']}}</td> 
+                <td>{{course['credits']}}</td>
+                <td>{{course['day_name']}}</td> 
+                <td>{{course['fname']}} {{course['lname']}}</td>
+                <td>{{course['start_time']}} - {{course['end_time']}}</td>
+            </tr>
+
+        {% endfor %}
+        </table>
+    </body>
+</html>

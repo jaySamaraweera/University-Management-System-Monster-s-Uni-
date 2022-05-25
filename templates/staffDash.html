@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">JTA University Staff Dashboard</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <h1>Hello {{info["fname"]}} {{info["lname"]}}, UID:{{info["uid"]}}</h1>
+    <h3>{{msg}}</h3>
+    <p><a href="/transcript">REVIEW TRANSCRIPTS</a></p>
+    <p><a href="/review">REVIEW APPLICATIONS</a></p>
+    <p><a href="/logout">LOGOUT</a></p>
+</body>  
+</html>  

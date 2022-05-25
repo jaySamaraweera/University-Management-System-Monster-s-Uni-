@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>View Thesis</title>
+    <link href="/static/styles/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+      <p class="topnav_page_nm">View Thesis Page</p>
+      <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    {% if Thesis.get("thesis") == "" %}
+      <h1>Thesis for student: {{stu_id}} </h1>
+      <p>Thesis not available: Student has not submitted Thesis yet.</p>
+    {% else%}
+      <h1>Thesis for Student: {{stu_id}} </h1>
+      <textarea id="Thesis" name="Thesis" rows="4" cols="100" disabled>
+          {{Thesis.get("thesis")}}
+      </textarea>
+      {% if thesis_status.get("thesis_approval") == 1: %}
+          <p>Approved</p>
+      {% else: %}
+          <form action="/advisor_students" method="POST">
+              <input type="hidden" id = "stu_id" name="stu_id" value = {{stu_id}}>
+              <input type="submit", name="Approve", value="Approve">
+          </form>
+      {% endif %}
+    {% endif %}
+    <p><a class="white" href="/advisor_students">Back</a></p>
+  </body>
+</html>

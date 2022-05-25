@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">Application for UID: {{user["uid"]}}</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <h3>Name: {{user["fname"]}} {{user["lname"]}}</h3>
+    {% for i in info %}
+    <li>Semester and Year of Application: {{i["semester"]}}</li>
+    <li> Applying for Degree: {{i["degree"]}}</li>
+    <li>GRE Verbal: {{i["GRE_VERBAL"]}}</li>
+    <li> Quantitative: {{i["GRE_QUANT"]}}</li>
+    <li>GRE Advanced Score: {{i["GRE_ADV_SCORE"]}} Subject: {{i["GRE_ADV_SUBJ"]}}</li>
+    <li>TOEFL Score: {{i["TOEFL_SCORE"]}} Year of Exam: {{i["TOEFL_YEAR"]}}</li>
+    <li>Area of Interest: {{i["INTERESTS"]}}</li>
+    <li>Experience: {{i["EXPERIENCE"]}}</li>
+    {% endfor %}
+    <p>Prior Degree 1:</p>
+    <li>Degree: {{priors[0]["degree"]}}</li>
+    <li>School Name: {{priors[0]["schoolname"]}} </li>
+    <li>Major: {{priors[0]["major"]}} </li>
+    <li>Year Graduated: {{priors[0]["year"]}} </li>
+    <li>GPA: {{priors[0]["gpa"]}} </li>
+    <p>Prior Degree 2: (if applicable)</p>
+    <li>Degree: {{priors[1]["degree"]}}</li>
+    <li>School Name: {{priors[1]["schoolname"]}} </li>
+    <li>Major: {{priors[1]["major"]}} </li>
+    <li>Year Graduated: {{priors[1]["year"] if priors[1]["year"] != 0 else ""}} </li>
+    <li>GPA: {{priors[1]["gpa"] if priors[1]["gpa"] != 0 else ""}} </li>
+
+
+    {% for letter in letters %}
+    <form action ="/review/{{user['uid']}}" method="POST">
+    <p>Recommendation Letter: {{letter["letter"]}}</p>
+    <p>Recommender: {{letter["fname"]}}, {{letter["lname"]}}</p>
+    <li>
+        Rating:
+        <input type ="number" name = "Rating" min="1" max = "5" required>
+        Generic:
+        <input type ="number" name = "Generic" min="1" max = "5" required>
+        Credible:
+        <input type ="number" name = "Credible" min="1" max = "5" required>
+    </li>
+    {% endfor %}
+
+    {% if session['typeuser'] != "gradsecretary" %}
+    <p>Decision
+        {% for dec in decision %}
+            <input type ="radio" value = "{{dec['decision_num']}}" name = "decision" required>{{dec["decision"]}}</input>
+        {% endfor %}
+    </p>
+    {% endif %}
+
+    <li>Deficiency Courses if Any:</li>
+    <input type ="text" name = "deficiency" maxLength = "50">
+    <li>GAS Reviewer Comments:</li>
+    <input type ="text" name = "comments" maxLength = "50">
+    <p><input type ="submit" value="SUBMIT"/></p> 
+    </form>
+</body>  
+</html>    

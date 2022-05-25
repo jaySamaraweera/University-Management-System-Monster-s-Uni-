@@ -1,0 +1,58 @@
+<!DOCTYPE html class>
+<html class = "ignore-css">
+  <head>
+    <title>New Customer Form</title>
+        <link href="/static/styles/styles.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <div class="topnav">
+    <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+    <p class="topnav_page_nm">Submit Form One</p>
+    <a style="float:right" href="/logout">Logout</a>
+  </div>
+  <div class="form-body" style="background-image: url('/static/styles/dc_cap.png'); background-size: cover;">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <p align = "left" > <a class="white" href="/dashboard">Back</a></p>
+                    <h3>Form1: Fill in the data below</h3>
+                    <p>{{mes}}</p>
+                        <!-- for autofill -->
+                        {% for i in range (num_courses): %} 
+                        <form action="/formOne" method="POST">
+                            <div class="input-group">
+                                <p>Course #{{i+1}}</p>
+                                <select name="dept_name{{i+1}}" class="form-control">
+                                    <option {{courses[i]['course_dname']}}>{{courses[i]['course_dname']}}</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" value="{{courses[i]['course_dname']}}"" name = "dept_name{{i+1}}" /> -->
+                                <span class="input-group-addon">-</span>
+                                <input type="text" class="form-control" value="{{courses[i]['course_num']}}"" name = "course_num{{i+1}}" />
+                            </div>
+                            <hr>
+                        {% endfor %}
+                        <!-- for non-autofill (i=0-len-1) -->
+                        {% for i in range (num_courses, 22): %}
+                        <form action="/formOne" method="POST">
+                            <div class="input-group">
+                                <p>Course #{{i+1}}</p>
+                                <select name="dept_name{{i+1}}" class="form-control">
+                                    <option value="">Select Type</option>
+                                    <option value="CSCI">CSCI</option>
+                                    <option value="ECE">ECE</option>
+                                    <option value="MATH">MATH</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" name = "dept_name{{i}}" placeholder="Department Name"/> -->
+                                <span class="input-group-addon">-</span>
+                                <input type="text" class="form-control" name = "course_num{{i}}" placeholder="Course Number"/>
+                            </div>
+                            <hr>
+                        {% endfor %}</br>
+                        <button class="submit" id="submit" type="submit">Submit</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="topnav">
+        <a href="/dashboard"><img src="/static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+        <p class="topnav_page_nm">Rec Letter Submission for UID:{{uid}}</p>
+        <a style="float:right" href="/logout">Logout</a>
+    </div></br>
+    <link href="/static/styles/styles.css" rel="stylesheet">
+    <h2>{{msg}}</h2>
+    <form action ="/recletter/{{uid}}" method = "POST">
+        <table class = "center">
+            <tr class = "c1">
+                <td>First Name of Recommender: </td>
+                <td><input type="text" name="field_fname" maxLength = "50" required></td>
+            </tr>
+            <tr>
+                <td>Last Name of Recommender: </td>
+                <td><input type="text" name="field_lname" maxLength = "50" required></td>
+            </tr>
+            <tr>
+                <td>Recommendation Letter: </td>
+                <div><textarea name="letter" rows="10" cols="30" maxLength = "1000" required></textarea></div>            
+            </tr>
+            <td colspan = "2"><input type="submit" name="submit"></td>
+        </table>
+    </form>    
+</body>  
+</html> 

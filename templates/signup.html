@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link href="/static/styles/styles.css" rel="stylesheet">
+<title>User Registration</title>
+<script src="/static/styles/java_script.js"></script>
+</head>
+
+<body>
+  <div class="topnav">
+    <a href="/dashboard"><img src="static/styles/gw_logo.png" alt="GW Logo" width="40" height="30"></a>
+    <p class="topnav_page_nm">User Registration</p>
+    <a style="float:right" href="/logout">Logout</a>
+</div></br>
+  {% if error %}
+  <h2>
+    {{ error }}
+  </h2>
+  {% endif %}
+  <form name="add_user_inputs" onsubmit="return validateForm()" action="/adminsignup" method="POST">
+    <table class = "center">
+      <tr class = "c1">
+        <td>Username: </td>
+        <td><input type="text" name="field_uid" required></td>
+      </tr>
+      <tr>
+        <td>Password: </td>
+        <td><input type="text" name="field_password" required></td>
+      </tr>
+      <tr>
+        <td>First Name: </td>
+        <td><input type="text" name="field_fname" required></td>
+      </tr>
+      <tr>
+        <td>Last Name: </td>
+        <td><input type="text" name="field_lname" required></td>
+      </tr>
+      <tr>
+        <td>Address: </td>
+        <td><input type="text" name="field_address" required></td>
+      </tr>
+      <tr>
+        <td>Email: </td>
+        <td><input type="text" name="field_email" required></td>
+      </tr>
+      <tr>
+          <td>Phone Number: </td>
+          <td><input type = "text" name = "field_phone" required></td>
+      </tr>
+          <td>SSN:</td>
+          <td><input type = "text" name = "field_ssn" required></td>
+      <tr>
+        <td>Type of User: </td>
+        <td>
+            <select id = "Type" name = "field_type">
+                <option value = "student">Student</option>
+                <option value = "professor">Professor</option>
+                <option value = "gradsecretary">Graduate Secretary</option>
+                <option value = "admin">Administrator</option>
+                <option value = "advisor">Faculty Advisor</option>
+            </select>
+        </td>
+      </tr>
+      <td colspan = "2"><input type="submit" name="submit" value="Update"></td>
+    </table>
+  </form>
+
+  <p align = "left" > <a class="white" href="/dashboard">Back</a></p>
+</body>
+
+</html>
